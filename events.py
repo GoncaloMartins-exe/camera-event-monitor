@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from datetime import datetime as DT
 
 EVENTS = {
     "people": ("IsPeople", "Person detected", "Person is no longer detected"),
@@ -33,3 +34,15 @@ def parse_events(xml):
             events.append((topic, data))
 
     return events
+
+def display_event(topic, data):
+    topic = topic.lower()
+    now = DT.now().strftime("%H:%M:%S")
+
+    for event_name, (value_name, true_message, false_message) in EVENTS.items():
+        if event_name in topic:
+            value = data.get(value_name, "").lower()
+            if value == "true":
+                print(f"[{now}] {true_message}", flush=True)
+            if value == "false":
+                print(f"[{now}] {false_message}", flush=True)
