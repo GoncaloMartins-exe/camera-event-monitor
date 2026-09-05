@@ -1,5 +1,13 @@
 import xml.etree.ElementTree as ET
 
+EVENTS = {
+    "people": ("IsPeople", "Person detected", "Person is no longer detected"),
+    "intrusion": ("IsIntrusion", "Intrusion detected", "Intrusion ended"),
+    "linecross": ("IsLineCross", "Crossed Line", None),
+    "motion": ("IsMotion", "Movement Detected", None),
+    "tamper": ("IsTamper", "Camera blocked", None),
+}
+
 def parse_events(xml):
     root = ET.fromstring(xml)
     events = []
