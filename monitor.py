@@ -1,5 +1,6 @@
 import time
 import requests
+import traceback 
 import xml.etree.ElementTree as ET
 
 from config import IP, RECONNECT_DELAY
@@ -32,10 +33,7 @@ def monitor():
             time.sleep(RECONNECT_DELAY)
 
         except Exception as e:
-            if subscription_url is None:
-                print(f"[WARNING] Camera unavailable. New try in {RECONNECT_DELAY}s...", flush=True)
-            else:
-                print("[WARNING] {e}", flush=True)
+            traceback.print_exc()
             subscription_url = None
             time.sleep(RECONNECT_DELAY)
 

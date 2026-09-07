@@ -11,7 +11,7 @@ def create_subscription():
     """
     root = ET.fromstring(soap_request(BASE_URL, body))
     for elem in root.iter():
-        if elem.tag.endswith("Adress") and elem.text:
+        if elem.tag.endswith("Address") and elem.text:
             return elem.text.strip()
     raise RuntimeError("The cam did not return a PullPoint adress.")
 
